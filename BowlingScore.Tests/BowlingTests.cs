@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Tests
 {
-    public class Tests
+    public class BowlingTests
     {
         string[] games = new[] {
         "X|X|X|X|X|X|X|X|X|X||XX",  // 300 - perfect game
