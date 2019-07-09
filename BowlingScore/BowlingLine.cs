@@ -54,17 +54,21 @@ namespace BowlingScore
                     {
                         if (i<8) // Frames 1-8
                         {
-                            // if strikes in next two frames
+                            // next frames X X
                             if (Frames[i + 1].First == Frame.ThrowValue.STRIKE &&
                                 Frames[i + 2].First == Frame.ThrowValue.STRIKE)
                                 score += fscore.score + 20;
                             else
-                            // if spare in next frame
+                            // next frame /
                             if (Frames[i + 1].Second == Frame.ThrowValue.SPARE)
                                 score += fscore.score + 10;
-                            // next frame open or STRIKE
                             else
-                                score += Frames[i + 1].Score.score;
+                            // next frames X nn or X n/
+                            if (Frames[i + 1].First == Frame.ThrowValue.STRIKE &&
+                                Frames[i + 2].First < Frame.ThrowValue.STRIKE)
+                                score += fscore.score + Frames[i + 1].Score.score + (int)Frames[i + 2].First;
+                            else // next open
+                                score += fscore.score + Frames[i + 1].Score.score;
                         }
                         else
                         if (i==8) // 9th frame STRIKE
@@ -77,7 +81,7 @@ namespace BowlingScore
                             // 10th Xnn or Xn/
                             if (Frames[i + 1].First == Frame.ThrowValue.STRIKE &&
                                 Frames[i + 1].Second < Frame.ThrowValue.STRIKE)
-                                score += fscore.score + (int)Frames[i + 1].Second;
+                                score += fscore.score + (int)Frames[i+1].First + (int)Frames[i + 1].Second;
                             else
                             // 10th n/n
                             if (Frames[i + 1].First < Frame.ThrowValue.STRIKE &&
@@ -85,7 +89,7 @@ namespace BowlingScore
                                 score += fscore.score + 10;
                             // 10th Open
                             else
-                                score += Frames[i + 1].Score.score;
+                                score += fscore.score + Frames[i + 1].Score.score;
                         }
                     }
                 }
