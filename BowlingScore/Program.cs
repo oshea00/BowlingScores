@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace BowlingScore
 {
-    class Program
+    public class Program
     {
         public static void Main(string[] args)
         {
@@ -35,6 +35,8 @@ namespace BowlingScore
                 }
             }
         }
+
+
 
         // Methods
         List<(int score, int bonus)> ScoreFrames(string[] frames)
@@ -158,7 +160,7 @@ namespace BowlingScore
             return true;
         }
 
-        (bool valid, string[] frames) ValidGameLine(string line)
+        public (bool valid, string[] frames) ValidGameLine(string line)
         {
             // line contains only valid characters
             string valid = "123456789-X/|";
