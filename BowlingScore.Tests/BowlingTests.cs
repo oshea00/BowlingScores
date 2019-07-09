@@ -140,10 +140,13 @@ namespace Tests
         }
 
         [Test]
-        public void InvalidBowlingLineThrowsException()
+        [TestCase("this is bad")]
+        [TestCase(null)]
+        [TestCase("")]
+        public void InvalidBowlingLineThrowsException(string line)
         {
             var msg = Assert.Throws<Exception>(()=> {
-                new BowlingLine("This is bad");
+                new BowlingLine(line);
             }).Message;
             Console.WriteLine(msg);
         }

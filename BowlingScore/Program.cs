@@ -10,11 +10,11 @@ namespace BowlingScore
         public static void Main(string[] args)
         {
             var p = new Program();
-            p.Main();
+            p.ScoreGames();
             Console.ReadKey();
         }
 
-        void Main()
+        void ScoreGames()
         {
             string[] games = new[] {
                 "X|X|X|X|X|X|X|X|X|X||XX",  // 300 - perfect game
