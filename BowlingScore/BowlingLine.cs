@@ -38,57 +38,55 @@ namespace BowlingScore
 
         public int ScoreGame()
         {
-            // Patterns:
-            // X
-
             int score = 0;
             try {
                 for (int i = 0; i < Frames.Count; i++)
                 {
                     var fscore = Frames[i].Score;
-                    if (fscore.bonus == 0) // OPEN FRAME
-                    {
+
+                    if (fscore.bonus == 0) // OPEN FRAME OR 10th FRAME
                         score += fscore.score;
-                    }
 
                     if (fscore.bonus == 1) // SPARE
-                    {
-                        var frame2 = Frames[i + 1];
-                        if (frame2.First < Frame.ThrowValue.STRIKE)
-                        {
-                            score += fscore.score + (int)frame2.First;
-                        }
-                        else
-                        {
-                            score += frame2.Score.score;
-                        }
-                    }
+                        score += fscore.score + (int)Frames[i + 1].First;
 
                     if (fscore.bonus == 2) // STRIKE
                     {
-                        if (Frames[i + 1].BonusThrow != Frame.ThrowValue.EMPTY) // 9th Frame STRIKE
+                        if (i<8) // Frames 1-8
                         {
-                            // 10th Frame  X44
+                            // if strikes in next two frames
                             if (Frames[i + 1].First == Frame.ThrowValue.STRIKE &&
-                                Frames[i + 1].Second < Frame.ThrowValue.STRIKE)
-                                score += fscore.score + (int)Frames[i + 1].First + (int)Frames[i + 1].Second;
+                                Frames[i + 2].First == Frame.ThrowValue.STRIKE)
+                                score += fscore.score + 20;
                             else
-                            // 10th Frame 4/3
+                            // if spare in next frame
                             if (Frames[i + 1].Second == Frame.ThrowValue.SPARE)
-                                score += 20;
+                                score += fscore.score + 10;
+                            // next frame open or STRIKE
                             else
-                                // 10th Frame 44
-                                score += fscore.score + (int)Frames[i + 1].First + (int)Frames[i + 1].Second;
+                                score += Frames[i + 1].Score.score;
                         }
                         else
-                        if (Frames[i + 1].First == Frame.ThrowValue.STRIKE &&
-                            Frames[i + 2].First == Frame.ThrowValue.STRIKE)
-                            score += fscore.score + 20;
-                        else
-                        if (Frames[i + 1].Second == Frame.ThrowValue.SPARE)
-                            score += fscore.score + 10;
-                        else
-                            score += fscore.score + (int)Frames[i + 1].First + (int)Frames[i + 1].Second; 
+                        if (i==8) // 9th frame STRIKE
+                        {
+                            // 10th XXn
+                            if (Frames[i + 1].First == Frame.ThrowValue.STRIKE &&
+                                Frames[i + 1].Second == Frame.ThrowValue.STRIKE)
+                                score += fscore.score + 20;
+                            else
+                            // 10th Xnn or Xn/
+                            if (Frames[i + 1].First == Frame.ThrowValue.STRIKE &&
+                                Frames[i + 1].Second < Frame.ThrowValue.STRIKE)
+                                score += fscore.score + (int)Frames[i + 1].Second;
+                            else
+                            // 10th n/n
+                            if (Frames[i + 1].First < Frame.ThrowValue.STRIKE &&
+                                Frames[i + 1].Second == Frame.ThrowValue.SPARE)
+                                score += fscore.score + 10;
+                            // 10th Open
+                            else
+                                score += Frames[i + 1].Score.score;
+                        }
                     }
                 }
             }

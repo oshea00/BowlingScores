@@ -169,7 +169,7 @@ namespace Tests
             }
         }
 
-        [Ignore("TBD")]
+        [Test]
         public void CanScoreGames()
         {
             var scores = new List<int>();
