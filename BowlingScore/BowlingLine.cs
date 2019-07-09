@@ -9,30 +9,42 @@ namespace BowlingScore
     public class BowlingLine
     {
         public List<Frame> Frames { get; }
+
         public BowlingLine(string bowlingLine)
         {
             try
             {
                 Frames = ParseLine(bowlingLine);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception($"Invalid Bowling Line String '{bowlingLine}'");
+                throw new Exception($"'{bowlingLine}' {ex.Message}");
             }
         }
 
         List<Frame> ParseLine(string bowlingLine)
         {
-            var line = Regex.Replace(bowlingLine, @"(\|)\1", "$1");
-            var frametoks = line.Split("|");
-            frametoks[9] = frametoks[9] + frametoks[10];
-            if (frametoks.Length == 11)
+            try
             {
-                return frametoks.Take(10).Select(f => new Frame(f)).ToList();
+                // Normalize the "legacy" game string syntax to work better for
+                // parsing frames by merging the bonus throws (delimited by ||)
+                // into the 10th frame.
+                var line = Regex.Replace(bowlingLine, @"(\|)\1", "$1");
+                var frametoks = line.Split("|");
+                if (frametoks.Length == 11)
+                {
+                    frametoks[9] = frametoks[9] + frametoks[10];
+                    return frametoks.Take(10)
+                            .Select(f => new Frame(f)).ToList();
+                }
+                else
+                {
+                    throw new Exception($"Invalid Frame Count");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                throw new Exception($"Invalid Bowling Line String '{line}'");
+                throw new Exception($"{ex.Message}",ex);
             }
         }
 
@@ -40,7 +52,7 @@ namespace BowlingScore
         {
             int score = 0;
             try {
-                for (int i = 0; i < Frames.Count; i++)
+                for (int i = 0; i < 10; i++)
                 {
                     var fscore = Frames[i].Score;
 

@@ -13,22 +13,12 @@ namespace Tests
 		"X|15|1/|X|9/|X|X|X|X|X||12", // 206
 		"X|1/|X|5/|X|3/|X|8/|X|9/||X", // 200 - "scottish" 200
 		"X|1/|X|5/|X|3/|X|8/|X|--||", // 170
+        "16|5/|54|3/|5/|X|X|X|6/|X||X5", // 187
     	};
 
         [SetUp]
         public void Setup()
         {
-        }
-
-        [Ignore("Refactor")]
-        public void LegacyCanValidateGameString()
-        {
-            var p = new Program();
-            foreach (var g in games)
-            {
-                var v = p.ValidGameLine(g);
-                Assert.IsTrue(v.valid);
-            }
         }
 
         [Test]
@@ -156,7 +146,6 @@ namespace Tests
                 new BowlingLine("This is bad");
             }).Message;
             Console.WriteLine(msg);
-            Assert.True(msg.StartsWith("Invalid"));
         }
 
         [Test]
@@ -177,7 +166,7 @@ namespace Tests
             {
                 scores.Add((new BowlingLine(g)).ScoreGame());
             }
-            Assert.AreEqual(new double[] { 300, 206, 200, 170 }, scores);
+            Assert.AreEqual(new double[] { 300, 206, 200, 170, 187 }, scores);
         }
     }
 }
