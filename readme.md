@@ -36,8 +36,8 @@ Using these rules on the example game above, you should arrive at a score of 187
 
 ## Getting Started
 Clone the repository and open the *BowlingScore.sln* file in Visual Studio, or your editor/IDE of choice.
-This is a dotnet core project, so you can also use the command line 'dotnet build' and 'dotnet run' commands 
-in the console project and test project directories respectively.
+This is a dotnet core project, so you can also use the command line 'dotnet build', 'dotnet run' and 'dotnet test'
+commands in the console project and test project directories respectively.
 
 ## Re-Factoring
 The project comes with tests written, so you can start re-factoring right away, and re-runs tests
