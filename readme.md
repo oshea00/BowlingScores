@@ -7,7 +7,7 @@ since many folks who bowl here are used to keeping score the old-fashioned way.
 
 One of our younger bowlers, who happens to program computers, thought it would be fun to score games
 with a computer program. So, they wrote this program and since have gone off to college. So we are
-left to kep it up-to-date ourselves. Any help is appreciated!
+left to keep it up-to-date ourselves. Any help is appreciated!
 
 The program takes a list of strings representing a 10-frame game that look like this:
 - "16|5/|54|3/|5/|X|X|X|6/|X||X5"
