@@ -74,6 +74,6 @@ This work is by Mike O'Shea [@oshea00](https://twitter.com/oshea00)
 
 
 ## Acknowledgements
-This work was inspired by the [Gilded Rose Project](https://github/NotMyself/GildedRose)
+This work was inspired by the [Gilded Rose Project](https://github.com/NotMyself/GildedRose)
 
 
