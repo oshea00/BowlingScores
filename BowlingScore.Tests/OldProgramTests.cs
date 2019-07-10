@@ -14,10 +14,10 @@ namespace OldProgramTests
 		"X|1/|X|5/|X|3/|X|8/|X|--||", // 170
     	};
 
-        string origOutput = "Game: X|X|X|X|X|X|X|X|X|X||XX Score: 300\r\n" +
-                            "Game: X|15|1/|X|9/|X|X|X|X|X||12 Score: 206\r\n" +
-                            "Game: X|1/|X|5/|X|3/|X|8/|X|9/||X1/ Score: 200\r\n" +
-                            "Game: X|1/|X|5/|X|3/|X|8/|X|--|| Score: 170\r\n"; 
+        string origOutput = "Game: X|X|X|X|X|X|X|X|X|X||XX Score: 300" + Environment.NewLine +
+                            "Game: X|15|1/|X|9/|X|X|X|X|X||12 Score: 206" + Environment.NewLine +
+                            "Game: X|1/|X|5/|X|3/|X|8/|X|9/||X1/ Score: 200" + Environment.NewLine +
+                            "Game: X|1/|X|5/|X|3/|X|8/|X|--|| Score: 170" + Environment.NewLine;
 
         [SetUp]
         public void Setup()
